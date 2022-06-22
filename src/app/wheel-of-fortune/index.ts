@@ -1,41 +1,37 @@
+import shuffle from 'array-shuffle'
 import { addIndex, map, range } from 'ramda'
-
-interface ConicGradient {
-  color: string
-  start?: string
-  end?: string
-}
 
 interface Wedge {
   label: string
-  rotation: string
+  rotation: number
+  color: string
+  start: number
+  end: number
+  center: number
 }
 
-const gradientPosition = (total: number, index:number): string =>
-  `${360/total * index}deg`
+const toDegrees = (total: number, index:number): number =>
+  360/total * index
 
-const wedgeRotation = (total: number, index: number): string =>
-  `rotate(${((360 / total) * index) + ((360 / total) / 2)}deg)`
-
-const toConicGradients = (
-  total: number,
+const toWedges = (
+  labels: string[],
   colors: string[]
-): ConicGradient[] =>
-  range(0, total).map((index) => ({
-    color: colors[index % colors.length],
-    start: gradientPosition(total, index),
-    end: gradientPosition(total, index + 1),
-  }))
-
-const toWedges = (labels: string[]): Wedge[] =>
+): Wedge[] =>
   addIndex(map)((label, index) => ({
     label,
-    rotation: wedgeRotation(labels.length, index)
+    rotation: `rotate(${toDegrees(labels.length, index + 0.5)}deg`,
+    color: colors[index % colors.length],
+    start: toDegrees(labels.length, index),
+    end: toDegrees(labels.length, index + 1),
+    center: toDegrees(labels.length, index + 0.5),
   }))(labels)
 
+const randomWedge = (wedges: Wedge[]) => new Promise(
+  (resolve) => resolve(shuffle(wedges).shift())
+)
 
 export {
-  toConicGradients,
-  toWedges,
   Wedge,
+  toWedges,
+  randomWedge,
 }

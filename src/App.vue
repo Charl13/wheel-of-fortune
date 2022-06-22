@@ -6,16 +6,14 @@ import { Home } from './components'
 </script>
 
 <template>
-  <v-app class="bg-grey-lighten-4">
+  <v-app>
     <home />
   </v-app>
 </template>
 
-<style lang="scss">
-#app .v-application__wrap {
+<style>
+.v-application {
   min-height: 100vh;
-  align-items: center;
-  justify-content: center;
-  flex-direction: row;
+
 }
 </style>

@@ -6,11 +6,15 @@ const path = require('path')
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  optimizeDeps: {
+    exclude: ['paths-js'],
+  },
   plugins: [
     vue(),
     // https://github.com/vuetifyjs/vuetify-loader/tree/next/packages/vite-plugin
     vuetify({
       autoImport: true,
+      styles: 'expose',
     }),
   ],
   define: { 'process.env': {} },

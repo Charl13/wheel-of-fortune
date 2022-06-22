@@ -1,8 +1,6 @@
 {
   "colors": [
-    "#6F63FF",
-    "#FFD770",
-    "#F06CD1",
-    "#7CD9FF"
+    "rgb(var(--v-theme-secondary-lighten-2))",
+    "rgb(var(--v-theme-secondary-lighten-3))"
   ]
 }
